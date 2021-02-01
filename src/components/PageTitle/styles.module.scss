@@ -1,0 +1,50 @@
+@import "src/scss/_global.scss";
+
+.button {
+  color: var(--text-01);
+  font-weight: bold;
+  padding: 2vw;
+  padding-right: 2vw;
+  padding-bottom: 3vw;
+  border: 0;
+  color: var(--text-02);
+  background: var(--interactive-01);
+  font-size: 2vw;
+  pointer-events: none;
+  width: 76%;
+  position: relative;
+  z-index: 10;
+  margin-bottom: 1rem;
+  clip-path: polygon(0 0, 100% 0, 98% 89%, 0% 100%);
+  h1 {
+    margin-top: 0;
+    margin-bottom: 0.2em;
+    font-weight: 400;
+    font-size: 3.2vw;
+    hyphens: auto;
+  }
+  p {
+    margin: 0;
+    font-size: 2.1vw;
+    font-weight: 200;
+  }
+}
+
+.restart {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 1000;
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 5% 96%);
+}
+
+.backIcon {
+  width: 1.5vw !important;
+  height: 1.5vw !important;
+  margin-right: 0.7vw;
+  transform: translateY(-0vw) rotate(180deg);
+}
+
+.modalText {
+  //font-size: 3rem;
+}

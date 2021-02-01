@@ -1,0 +1,48 @@
+/*@import "scss/global";
+
+.repeater {
+  a {
+    text-decoration: none;
+  }
+  > * {
+    &:last-child {
+      .repeaterItem {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+
+.repeaterItem {
+  display: block;
+  padding: $spacing-md;
+  border-radius: 5px;
+  background: var(--ui-02);
+  margin-bottom: $spacing-xs;
+  text-decoration: none;
+  align-items: center;
+  display: flex;
+  a {
+    text-decoration: none;
+  }
+}
+
+.repeaterItemImage {
+  width: 2rem;
+  height: 2rem;
+  align-content: stretch;
+  align-items: stretch;
+  display: flex;
+  margin-right: 1em;
+}
+
+.addButton {
+  margin-top: $spacing-md;
+}
+
+.repeaterItemContent {
+  margin-top: $spacing-xs;
+  color: var(--text-02);
+  @include typescale(caption);
+}
+*/

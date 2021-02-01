@@ -1,0 +1,31 @@
+@import "src/scss/_global.scss";
+
+.button {
+  color: var(--ui-01);
+  font-weight: bold;
+  padding: 2vw;
+  border: 0;
+  background: var(--interactive-01);
+  font-size: 3vw;
+  font-weight: normal;
+  font-family: "geometric";
+  cursor: pointer;
+  transition: all 0.5s;
+  &:hover {
+    color: var(--ui-01);
+    //background: lighten(var(--ui-01), 10);
+  }
+  &:focus {
+    outline: none;
+  }
+}
+
+.secondary {
+  @extend .button;
+  color: $text-01;
+  background: var(--ui-02);
+  &:hover {
+    color: var(--interactive-01);
+    background: var(--ui-02);
+  }
+}

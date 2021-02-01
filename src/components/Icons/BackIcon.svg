@@ -1,0 +1,19 @@
+<svg
+    width="37px"
+    height="56px"
+    viewBox="0 0 37 56"
+    className={styles.playIcon}
+>
+    <g
+    id="Page-1"
+    stroke="none"
+    strokeWidth="1"
+    fill="none"
+    fillRule="evenodd"
+    >
+    <polygon
+        fill="currentColor"
+        points="9.30761184 0.115223689 0.115223689 9.30761184 18.5 27.9308981 0.115223689 46.0971645 9.30761184 55.2895526 36.8847763 27.7123882"
+    ></polygon>
+    </g>
+</svg>

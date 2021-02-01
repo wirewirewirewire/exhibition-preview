@@ -1,0 +1,18 @@
+@import "scss/_global.scss";
+
+.buttonWrapper {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: $spacing-md;
+}
+
+.headerRight {
+  display: flex;
+
+  > * {
+    margin-left: $spacing-md;
+  }
+}
+.saveIcon {
+  color: var(--interactive-01);
+}

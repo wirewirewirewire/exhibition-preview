@@ -1,0 +1,52 @@
+@import "src/scss/_global.scss";
+
+.preview {
+  width: 400px;
+  height: auto;
+}
+
+.pictureButton {
+  margin-bottom: $spacing-md;
+}
+
+.buttonWrapper {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: $spacing-md;
+}
+
+.patientName {
+  font-weight: 600;
+}
+
+.subTitle {
+  margin-top: $spacing-xs;
+  color: var(--text-02);
+  @include typescale(caption);
+}
+
+.wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.imeiWrapper {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.buttonClassName {
+  margin-left: $spacing-xs;
+}
+
+.battery {
+  width: 2rem;
+}
+
+.content {
+  flex: 1;
+}
+
+.responseSelect {
+  font-size: 1rem;
+}
