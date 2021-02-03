@@ -1,20 +1,18 @@
 import React, { useEffect } from "react";
-import styles from "./response-type.module.scss";
+import styles from "./styles.module.scss";
 import { useDispatch, useSelector } from "react-redux";
 //import Button from "components/Button";
 import { Button, Loading } from "@wfp/ui";
 import { NavLink } from "react-router-dom";
 import PageTitle from "components/PageTitle";
 import Page from "components/Page";
-import { getDeviceData } from "ducks/data";
-import i18next from "i18next";
-import LanguageSwitcher from "components/LanguageSwitcher";
+
 import { Trans } from "react-i18next";
 import devices from "ducks/devices";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import deviceKindLookUp from "helpers/deviceKindLookUp";
 
-const ResponseQuestion = ({ questions }) => {
+const Overview = ({ questions }) => {
   const data = useSelector(devices.selectors.dataArray);
 
   console.log(data);
@@ -22,15 +20,13 @@ const ResponseQuestion = ({ questions }) => {
   useEffect(() => {
     dispatch(devices.actions.fetch());
   }, []);
-
-  if (!data) return <Loading />;
+  if (!data && data.length <= 0) return <Loading />;
   return (
     <Page className={styles.page}>
-      <PageTitle>
-        <h1>
-          <Trans>Select a device</Trans>
-        </h1>
-      </PageTitle>
+      <h1>
+        <Trans>Select a device</Trans>
+      </h1>
+
       <div className={styles.title}>
         {data.map((question, i) => {
           const kind = question.deviceKind.find(
@@ -43,12 +39,18 @@ const ResponseQuestion = ({ questions }) => {
             : deviceKindLookUp.default;
 
           return (
-            <NavLink to={`/type/${i}`} key={i}>
-              <div key={i}>
-                <FontAwesomeIcon icon={deviceKind.icon} />
-                {question.description}
-                <small>{kind?.__component}</small>
-              </div>
+            <NavLink
+              to={`/type/${question.id}`}
+              key={i}
+              className={styles.listItem}
+            >
+              <FontAwesomeIcon icon={deviceKind.icon} />
+              <h3>{question.description}</h3>
+              <small>
+                {kind?.__component
+                  ? kind?.__component.split(".")[1]
+                  : "no deviceKind"}
+              </small>
             </NavLink>
           );
         })}
@@ -57,4 +59,4 @@ const ResponseQuestion = ({ questions }) => {
   );
 };
 
-export default ResponseQuestion;
+export default Overview;

@@ -3,9 +3,7 @@ import {
   faPaperPlane,
   faPhotoVideo,
   faTvMusic,
-} from "@fortawesome/pro-duotone-svg-icons";
-import { faRectanglePortrait } from "@fortawesome/pro-regular-svg-icons";
-import { faTreasureChest } from "@fortawesome/pro-solid-svg-icons";
+} from "@fortawesome/pro-light-svg-icons";
 
 const deviceKindLookUp = {
   "players.react-mediaplayer": { icon: faPhotoVideo },

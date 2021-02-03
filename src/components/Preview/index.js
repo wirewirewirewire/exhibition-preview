@@ -40,24 +40,23 @@ const Preview = (props) => {
 
   if (!data) return null;
 
-  const scaleX = width / 1920;
-  const scaleY = window.innerHeight / 1080;
-  const scale = [scaleX, scaleY];
+  const previewSettings = data.deviceKind.find(
+    (e) => e.__component === "settings.preview"
+  );
 
-  console.log("scale", scale, Math.min(scale));
+  const scaleX = width / previewSettings.resolutionWidth;
+  const scaleY = window.innerHeight / 1080;
 
   return (
     <div className={styles.preview}>
       <div className={styles.title}>
         <iframe
-          src="https://bewegung.vercel.app"
-          title="W3Schools Free Online Web Tutorials"
-          width="1920"
-          height="1080"
+          src={previewSettings.previewurl}
+          title="Preview"
           className={styles.previewWrapper}
           style={{
-            width: `${1920}px`,
-            height: `${1080}px`,
+            width: `${previewSettings.resolutionWidth}px`,
+            height: `${previewSettings.resolutionHeight}px`,
             transform: `translateX(-50%) translateY(-50%) scale(${Math.min(
               scaleX,
               scaleY

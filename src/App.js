@@ -1,6 +1,6 @@
 import React from "react";
 import "./scss/app.scss";
-import ResponseQuestion from "components/ResponseQuestion";
+import Overview from "components/Overview";
 import Preview from "components/Preview";
 import ResponseType from "components/ResponseType";
 import Login from "components/Login";
@@ -43,7 +43,7 @@ function AnimatedRoutes() {
         >
           <Switch location={location}>
             {/*<Redirect from="/" to="responsetype" />*/}
-            <Route exact path="/" component={ResponseQuestion} />
+            <Route exact path="/" component={Overview} />
             <Route path="/login" component={Login} />
             <Route path="/responseselect" component={ResponseSelect} />
             <Route path="/type/:id?" component={ResponseType} />

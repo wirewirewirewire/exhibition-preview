@@ -1,6 +1,5 @@
 @import "src/scss/_global.scss";
 @import "src/scss/_font.scss";
-@import "literallycanvas/scss/literallycanvas.scss";
 
 .App {
   height: 100vh;
@@ -31,21 +30,4 @@ body,
       }
     }
   }
-}
-
-.literally {
-  background: var(--ui-01);
-}
-.lc-drawing {
-  top: 0 !important;
-  left: 0 !important;
-  //filter: invert(1);
-}
-
-.lc-picker {
-  display: none;
-}
-
-.lc-options {
-  display: none;
 }
