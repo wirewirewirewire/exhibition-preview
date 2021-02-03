@@ -13,7 +13,7 @@
 
 .secondary {
   @extend .page;
-  color: $text-01;
+  color: var(--text-01);
   background: var(--ui-02);
 }
 

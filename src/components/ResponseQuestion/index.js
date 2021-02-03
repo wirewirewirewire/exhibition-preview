@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "./response-type.module.scss";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 //import Button from "components/Button";
 import { Button, Loading } from "@wfp/ui";
 import { NavLink } from "react-router-dom";
@@ -10,31 +10,48 @@ import { getDeviceData } from "ducks/data";
 import i18next from "i18next";
 import LanguageSwitcher from "components/LanguageSwitcher";
 import { Trans } from "react-i18next";
+import devices from "ducks/devices";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import deviceKindLookUp from "helpers/deviceKindLookUp";
 
 const ResponseQuestion = ({ questions }) => {
-  const data = useSelector(getDeviceData);
+  const data = useSelector(devices.selectors.dataArray);
+
+  console.log(data);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(devices.actions.fetch());
+  }, []);
 
   if (!data) return <Loading />;
   return (
     <Page className={styles.page}>
-      <PageTitle actionButton={<LanguageSwitcher />}>
+      <PageTitle>
         <h1>
-          <Trans>1945 und heute?</Trans>
+          <Trans>Select a device</Trans>
         </h1>
-        <p>
-          <Trans>introText</Trans>
-        </p>
       </PageTitle>
       <div className={styles.title}>
-        {Object.entries(data.json.questions).map(([key, question], i) => (
-          <NavLink to={`/type/${key}`} key={i}>
-            <Button key={i} kind="secondary">
-              {i18next.language === "en"
-                ? question.question_en
-                : question.question}
-            </Button>
-          </NavLink>
-        ))}
+        {data.map((question, i) => {
+          const kind = question.deviceKind.find(
+            (e) =>
+              e.__component.startsWith("players.") /*=== "players.mediaplayer"*/
+          );
+
+          const deviceKind = deviceKindLookUp?.[kind?.__component]
+            ? deviceKindLookUp?.[kind?.__component]
+            : deviceKindLookUp.default;
+
+          return (
+            <NavLink to={`/type/${i}`} key={i}>
+              <div key={i}>
+                <FontAwesomeIcon icon={deviceKind.icon} />
+                {question.description}
+                <small>{kind?.__component}</small>
+              </div>
+            </NavLink>
+          );
+        })}
       </div>
     </Page>
   );

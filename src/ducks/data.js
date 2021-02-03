@@ -9,7 +9,7 @@ import Color from "color";
 const initialState = {
   data: undefined,
   responses: [],
-  fetchinsg: false,
+  fetching: false,
   error: null,
 };
 
@@ -76,6 +76,7 @@ function* workerSaga({ payload }) {
 
 export default data;
 
+/*
 export function DataLoader() {
   const dispatch = useDispatch();
   useEffect(() => {
@@ -110,3 +111,4 @@ export function DataLoader() {
 
   return null;
 }
+*/

@@ -34,7 +34,7 @@ export function editGenerator({ duck }) {
     yield takeEvery(duck.actions.fetchSingle, workerFetchSingleSaga);
   }
 
-  function fetchFetchSingleSaga({ postId, values }) {
+  function fetchFetchSingleSaga({ postId }) {
     return Axios({
       method: "GET",
       url: `${process.env.REACT_APP_SERVER_BASE_URL}${duck.name}/${postId}`,
@@ -201,6 +201,12 @@ export const selectors = (duck) => {
     status: (state) => state[duck.name],
     data: (state) => state[duck.name].data,
     dataArray: (state, filter) => {
+      console.log(
+        "dataArray",
+        duck.name,
+        state[duck.name],
+        state[duck.name].data
+      );
       var values = Object.values(state[duck.name].data);
       return values;
     },
@@ -208,6 +214,6 @@ export const selectors = (duck) => {
       var values = Object.values(duckContent);
       return values;
     },
-    byId: (state, id) => state[duck.name].data[id],
+    byId: (state, id) => state[duck.name]?.data?.[id],
   };
 };

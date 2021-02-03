@@ -5,7 +5,7 @@ import useSettingsForm from "helpers/useSettingsForm";
 import { Trans } from "react-i18next";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faInfoCircle } from "@fortawesome/pro-light-svg-icons";
-import partizipations from "ducks/partizipations";
+import devices from "ducks/devices";
 
 import { useSelector } from "react-redux";
 import { useParams } from "react-router";
@@ -13,10 +13,10 @@ import { useParams } from "react-router";
 export default function SettingsPatientsDetail() {
   const params = useParams();
   const store = useSettingsForm({
-    name: "partizipations",
-    getEntryById: partizipations.selectors.byId,
-    getStatus: partizipations.selectors.status,
-    duck: partizipations,
+    name: "devices",
+    getEntryById: devices.selectors.byId,
+    getStatus: devices.selectors.status,
+    duck: devices,
     url: `/responseselect`,
   });
 

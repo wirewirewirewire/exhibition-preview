@@ -5,8 +5,8 @@ import {
   selectors,
 } from "helpers/crudGenerator";
 
-const partizipations = createSlice({
-  name: "partizipations",
+const devices = createSlice({
+  name: "devices",
   initialState: { data: {} },
   reducers: {
     ...crudOperations,
@@ -19,7 +19,7 @@ const partizipations = createSlice({
   },
 });
 
-partizipations.selectors = selectors(partizipations);
-partizipations.sagas = editGenerator({ duck: partizipations });
+devices.selectors = selectors(devices);
+devices.sagas = editGenerator({ duck: devices });
 
-export default partizipations;
+export default devices;

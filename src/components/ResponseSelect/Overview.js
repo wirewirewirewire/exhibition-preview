@@ -11,7 +11,7 @@ import ButtonRouter from "components/ButtonRouter";
 
 import useSettingsOverview from "helpers/useSettingsOverview";
 import { Trans } from "react-i18next";
-import partizipations from "ducks/partizipations";
+import devices from "ducks/devices";
 
 import { Select, SelectItem } from "@wfp/ui";
 import qs from "qs";
@@ -22,12 +22,12 @@ export default function SettingsPatients() {
   const history = useHistory();
 
   const stockArray = useSelector((state) =>
-    partizipations.selectors.dataArray(state, locationParams.patient)
+    devices.selectors.dataArray(state, locationParams.patient)
   );
 
   const settingsOverview = useSettingsOverview({
-    name: "partizipations",
-    duck: partizipations,
+    name: "devices",
+    duck: devices,
   });
 
   return (
