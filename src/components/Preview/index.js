@@ -21,7 +21,7 @@ const Preview = (props) => {
 
   useEffect(() => {
     const resizeListener = () => {
-      // change width from the state object
+      // change width from the state objecty
       setWidth(window.innerWidth);
     };
     // set resize listener
@@ -44,19 +44,29 @@ const Preview = (props) => {
     (e) => e.__component === "settings.preview"
   );
 
-  const scaleX = width / previewSettings.resolutionWidth;
-  const scaleY = window.innerHeight / 1080;
+  const resolutionWidth = previewSettings?.resolutionWidth
+    ? previewSettings.resolutionWidth
+    : 1920;
+  const resolutionHeight = previewSettings?.resolutionHeight
+    ? previewSettings.resolutionHeight
+    : 1080;
+
+  const previewUrl = previewSettings?.previewurl
+    ? previewSettings.previewurl
+    : "https://exhibition-react-mediaplayer.vercel.app/";
+  const scaleX = width / resolutionWidth;
+  const scaleY = window.innerHeight / resolutionHeight;
 
   return (
     <div className={styles.preview}>
       <div className={styles.title}>
         <iframe
-          src={previewSettings.previewurl}
+          src={`${previewUrl}/#/?dataOverrideUrl=${process.env.REACT_APP_SERVER_BASE_URL}devices/${match.params.id}`}
           title="Preview"
           className={styles.previewWrapper}
           style={{
-            width: `${previewSettings.resolutionWidth}px`,
-            height: `${previewSettings.resolutionHeight}px`,
+            width: `${resolutionWidth}px`,
+            height: `${resolutionHeight}px`,
             transform: `translateX(-50%) translateY(-50%) scale(${Math.min(
               scaleX,
               scaleY

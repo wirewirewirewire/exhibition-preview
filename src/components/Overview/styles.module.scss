@@ -1,16 +1,31 @@
+@import "src/scss/_global.scss";
+
 .page {
   height: 100%;
   display: flex;
   flex-direction: column;
 }
 .title {
-  color: blue;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-  grid-template-rows: auto;
-  grid-column-gap: 2vw;
-  grid-row-gap: 2vw;
+  color: #0000ff;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  @include breakpointMax(bp--sm--major) {
+  }
+
   height: 100%;
+}
+
+.sidebarLink {
+  text-decoration: none;
+}
+
+.sidebarImage {
+  color: var(--interactive-01);
+  margin: 0.3em 0.6em !important;
+  display: block;
+  width: 3.6em !important;
+  height: auto !important;
 }
 
 .listItem {
@@ -20,6 +35,13 @@
   text-align: center;
   margin: 0.5em;
   padding: 1.5em;
+  width: calc(100% - 1em);
+  @include breakpoint(bp--sm--major) {
+    width: calc(50% - 1em);
+  }
+  @include breakpoint(bp--md--major) {
+    width: calc(25% - 1em);
+  }
   &:hover {
     background: var(--ui-02);
   }

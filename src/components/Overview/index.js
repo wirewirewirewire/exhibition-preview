@@ -1,61 +1,118 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./styles.module.scss";
 import { useDispatch, useSelector } from "react-redux";
 //import Button from "components/Button";
-import { Button, Loading } from "@wfp/ui";
-import { NavLink } from "react-router-dom";
-import PageTitle from "components/PageTitle";
+import {
+  Empty,
+  Search,
+  Loading,
+  SidebarHeader,
+  SidebarScroll,
+  SidebarBackButton,
+  Sidebar,
+  Item,
+} from "@wfp/ui";
+import { NavLink, useParams } from "react-router-dom";
 import Page from "components/Page";
 
-import { Trans } from "react-i18next";
 import devices from "ducks/devices";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import deviceKindLookUp from "helpers/deviceKindLookUp";
+import Details from "components/Details";
+import Nav from "components/Nav";
 
 const Overview = ({ questions }) => {
   const data = useSelector(devices.selectors.dataArray);
+  const [search, setSearch] = useState();
 
-  console.log(data);
+  const [selectedUserId, setSelectedUserId] = useState(null);
+  //const [search, setSearch] = useState(null);
+  const params = useParams();
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(devices.actions.fetch());
   }, []);
-  if (!data && data.length <= 0) return <Loading />;
+
+  const searchResults = search
+    ? data.filter((e) =>
+        e.description.toLocaleLowerCase().includes(search.toLocaleLowerCase())
+      )
+    : data;
+
   return (
-    <Page className={styles.page}>
-      <h1>
-        <Trans>Select a device</Trans>
-      </h1>
+    <>
+      <Page className={styles.page}>
+        <Nav />
+        <Sidebar
+          active={params.id}
+          sidebarMobileHeader={
+            <>
+              <NavLink to={`/`}>
+                <SidebarBackButton>Back</SidebarBackButton>
+              </NavLink>
+              <div>Detail page</div>
+            </>
+          }
+          sidebarContent={
+            <>
+              <SidebarHeader>
+                <Search
+                  placeHolderText="Type to search user"
+                  onChange={(e) => setSearch(e)}
+                />
+              </SidebarHeader>
+              <SidebarScroll>
+                {!data || data.length < 1 ? (
+                  <Loading />
+                ) : searchResults && searchResults.length > 0 ? (
+                  <>
+                    {searchResults.map((question, i) => {
+                      const kind = question.deviceKind.find((e) =>
+                        e.__component.startsWith("players.")
+                      );
 
-      <div className={styles.title}>
-        {data.map((question, i) => {
-          const kind = question.deviceKind.find(
-            (e) =>
-              e.__component.startsWith("players.") /*=== "players.mediaplayer"*/
-          );
-
-          const deviceKind = deviceKindLookUp?.[kind?.__component]
-            ? deviceKindLookUp?.[kind?.__component]
-            : deviceKindLookUp.default;
-
-          return (
-            <NavLink
-              to={`/type/${question.id}`}
-              key={i}
-              className={styles.listItem}
-            >
-              <FontAwesomeIcon icon={deviceKind.icon} />
-              <h3>{question.description}</h3>
-              <small>
-                {kind?.__component
-                  ? kind?.__component.split(".")[1]
-                  : "no deviceKind"}
-              </small>
-            </NavLink>
-          );
-        })}
-      </div>
-    </Page>
+                      const deviceKind = deviceKindLookUp?.[kind?.__component]
+                        ? deviceKindLookUp?.[kind?.__component]
+                        : deviceKindLookUp.default;
+                      return (
+                        <NavLink
+                          to={`/type/${question.id}`}
+                          key={i}
+                          className={styles.sidebarLink}
+                        >
+                          <Item
+                            active={question.id === parseInt(params.id)}
+                            image={
+                              <FontAwesomeIcon
+                                icon={deviceKind.icon}
+                                className={styles.sidebarImage}
+                              />
+                            }
+                            title={question.description}
+                            children={
+                              kind?.__component
+                                ? kind?.__component.split(".")[1]
+                                : "no deviceKind"
+                            }
+                            kind="horizontal"
+                            wrapper="sidebar"
+                            noImage
+                          />
+                        </NavLink>
+                      );
+                    })}
+                  </>
+                ) : (
+                  <Empty title="No results">Please check your search</Empty>
+                )}
+              </SidebarScroll>
+            </>
+          }
+        >
+          <Details />
+        </Sidebar>
+      </Page>
+    </>
   );
 };
 

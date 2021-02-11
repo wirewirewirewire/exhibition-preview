@@ -1,28 +1,11 @@
-$css--reset: false;
-$css--body: true;
+$css--variables: false !default;
+$video-react-text-font-family: "geometric";
 
 @import "~@wfp/ui/src/globals/scss/colors";
 @import "~@wfp/ui/src/globals/scss/vars";
 @import "~@wfp/ui/src/globals/scss/layout";
 @import "~@wfp/ui/src/globals/scss/_typography";
-/*
-$text-01: #ffffff;
 
-$font-family-sans-serif: "geometric";
-
-$button-height: 80px;
-$button-padding: 1rem 2rem;
-
-
-* {
-  box-sizing: border-box;
-}
-
-html,
-body {
-  height: 100%;
-  overflow: hidden;
-  margin: 0;
-  padding: 0;
-}
-*/
+/*$css--reset: false;
+$css--body: true;
+$css--variables: false;*/
