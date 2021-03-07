@@ -21,9 +21,9 @@ $color__navy-gray-0: #0f161b;
 
 body {
   --interactive-01: #1776f2 !important;
-  --interactive-01: #{darken(#1776f2, 10)} !important;
+  --interactive-02: #{darken(#1776f2, 10)} !important;
   --accent-01: #ff544c !important;
-  --accent-02: #{darken(#ff544c, 10)} !important;
+  --accent-02: #{darken(#ff544c, 5)} !important;
 }
 
 .wfp--btn--accent {

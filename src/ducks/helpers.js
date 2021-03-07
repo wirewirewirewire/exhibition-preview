@@ -86,6 +86,7 @@ export function* workerSagaRequest(fetchSaga, success, failure, payload) {
     const data = response.data;
     yield put(success(data));
   } catch (error) {
+    console.log(error);
     yield put(failure(error));
   }
 }

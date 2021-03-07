@@ -15,6 +15,7 @@ import deviceKindLookUp from "helpers/deviceKindLookUp";
 import Empty from "components/Empty";
 import { faCrow, faPlay } from "@fortawesome/pro-light-svg-icons";
 import { faExternalLink, faSearch } from "@fortawesome/pro-solid-svg-icons";
+import Partizipation from "components/Partizipation";
 
 const Details = (props) => {
   const params = useParams();
@@ -46,7 +47,14 @@ const Details = (props) => {
     ? deviceKindLookUp?.[kind?.__component]
     : deviceKindLookUp.default;
 
-  //return null;
+  const previewSettings = data.deviceKind.find(
+    (e) => e.__component === "settings.preview"
+  );
+
+  const mediaplayerSettings = data.deviceKind.find(
+    (e) => e.__component === "players.react-mediaplayer"
+  );
+
   return (
     <div className={styles.page}>
       <div className={styles.pageTitle}>
@@ -66,19 +74,21 @@ const Details = (props) => {
       </div>
 
       <div className={styles.buttons}>
-        <NavLink to={`/preview/${params.id}`} target="_blank">
-          <Button
-            icon={
-              <FontAwesomeIcon
-                icon={faSearch}
-                className={styles.sidebarImage}
-              />
-            }
-            kind="accent"
-          >
-            Preview
-          </Button>
-        </NavLink>{" "}
+        {(previewSettings?.previewurl || mediaplayerSettings) && (
+          <NavLink to={`/preview/${params.id}`} target="_blank">
+            <Button
+              icon={
+                <FontAwesomeIcon
+                  icon={faSearch}
+                  className={styles.sidebarImage}
+                />
+              }
+              kind="accent"
+            >
+              Preview
+            </Button>
+          </NavLink>
+        )}
         <a
           href={`${process.env.REACT_APP_SERVER_BASE_URL}admin/plugins/content-manager/collectionType/application::devices.devices/${params.id}`}
           target="_blank"
@@ -115,7 +125,9 @@ const Details = (props) => {
           {data.deviceKind.map((deviceKind) => (
             <div>
               <h4>{deviceKind.__component.split(".")[1]}</h4>
-
+              {deviceKind.__component === "players.json-player" && (
+                <Partizipation id={data.id} deviceKind={deviceKind} />
+              )}
               {deviceKind.__component === "settings.preview" && (
                 <List kind="bullets">
                   <ListItem title="url">
@@ -173,7 +185,6 @@ const Details = (props) => {
                   ))}
                 </List>
               )}
-
               {deviceKind.Trigger && (
                 <>
                   <h4>Trigger</h4>

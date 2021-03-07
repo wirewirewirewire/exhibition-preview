@@ -1,0 +1,22 @@
+@import "src/scss/_global.scss";
+
+.icon,
+.iconAllow,
+.iconReject {
+  color: var(--interactive-01);
+  width: 2.7em !important;
+}
+
+.iconAllow {
+  color: var(--support-02);
+}
+
+.iconReject {
+  color: var(--support-01);
+}
+
+.previewImage {
+  max-height: 300px;
+  width: auto;
+  background: lighten(#000, 10);
+}

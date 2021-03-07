@@ -13,7 +13,7 @@ const Nav = (props) => {
       logo={
         <div className={styles.logo}>
           <Logo />
-          Exhibition preview
+          exhibition preview
         </div>
       }
     >

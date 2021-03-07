@@ -20,12 +20,34 @@
   text-decoration: none;
 }
 
+.iconWrapper {
+  position: relative;
+  height: 3.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sidebarImage,
+.sidebarImageDuo {
+  margin: 0.3em 0.4em !important;
+  display: block;
+  width: 2.5em !important;
+  height: auto !important;
+  //position: absolute;
+}
+.sidebarImageDuo {
+  color: var(--accent-01);
+  opacity: 0.9;
+  transform: translateX(0.1em) translateY(0em) rotate(-1deg) scale(0.95);
+  //display: none !important;
+  //--fa-primary-color: var(--interactive-01);
+  //--fa-secondary-color: var(--accent-01);
+}
+
 .sidebarImage {
   color: var(--interactive-01);
-  margin: 0.3em 0.6em !important;
-  display: block;
-  width: 3.6em !important;
-  height: auto !important;
+  opacity: 0.9;
 }
 
 .listItem {

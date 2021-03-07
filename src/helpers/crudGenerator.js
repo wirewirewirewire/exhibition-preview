@@ -181,7 +181,7 @@ export const crudOperations = {
   updateSingleSuccess: (state, action, filter) => {
     state.loadingCrud = false;
     state.error = false;
-    state.data[action.payload.post.id] = action.payload.post;
+    state.data[action.payload.id] = action.payload;
     state.latestCrudUpdate = action.payload.post;
   },
   deleteSingle: (state, action, filter) => {
@@ -201,12 +201,6 @@ export const selectors = (duck) => {
     status: (state) => state[duck.name],
     data: (state) => state[duck.name].data,
     dataArray: (state, filter) => {
-      console.log(
-        "dataArray",
-        duck.name,
-        state[duck.name],
-        state[duck.name].data
-      );
       var values = Object.values(state[duck.name].data);
       return values;
     },

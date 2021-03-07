@@ -30,6 +30,7 @@ const Overview = ({ questions }) => {
   const params = useParams();
   const dispatch = useDispatch();
   useEffect(() => {
+    console.log("reload");
     dispatch(devices.actions.fetch());
   }, []);
 
@@ -53,7 +54,7 @@ const Overview = ({ questions }) => {
               <div>Detail page</div>
             </>
           }
-          sidebarContent={
+          sidebar={
             <>
               <SidebarHeader>
                 <Search
@@ -83,10 +84,16 @@ const Overview = ({ questions }) => {
                           <Item
                             active={question.id === parseInt(params.id)}
                             image={
-                              <FontAwesomeIcon
-                                icon={deviceKind.icon}
-                                className={styles.sidebarImage}
-                              />
+                              <div className={styles.iconWrapper}>
+                                {/*} <FontAwesomeIcon
+                                  icon={deviceKind.iconDuo}
+                                  className={styles.sidebarImageDuo}
+                            />*/}
+                                <FontAwesomeIcon
+                                  icon={deviceKind.icon}
+                                  className={styles.sidebarImage}
+                                />
+                              </div>
                             }
                             title={question.description}
                             children={
