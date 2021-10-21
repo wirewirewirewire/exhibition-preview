@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const axiosInterceptors = {
-  setupInterceptors: () => {
+  setupInterceptors: (history) => {
     const token = localStorage.getItem("access-token");
 
     axios.interceptors.request.use(
@@ -23,7 +23,8 @@ export const axiosInterceptors = {
       function (error) {
         // catches if the session ended!
         if (error.response && error.response.status === 401) {
-          // localStorage.clear();
+          localStorage.clear();
+          history.push("/login");
         }
         return Promise.reject(error);
       }

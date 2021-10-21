@@ -2,12 +2,6 @@ import React, { useEffect, useState } from "react";
 import styles from "./styles.module.scss";
 
 import { useDispatch, useSelector } from "react-redux";
-import { Button } from "@wfp/ui";
-import { NavLink } from "react-router-dom";
-import PageTitle from "components/PageTitle";
-import Page from "components/Page";
-
-import { Trans } from "react-i18next";
 import devices from "ducks/devices";
 
 const Preview = (props) => {
@@ -61,7 +55,7 @@ const Preview = (props) => {
     <div className={styles.preview}>
       <div className={styles.title}>
         <iframe
-          src={`${previewUrl}/#/?dataOverrideUrl=${process.env.REACT_APP_SERVER_BASE_URL}devices/${match.params.id}`}
+          src={`${previewUrl}/?dataOverrideUrl=${process.env.REACT_APP_SERVER_BASE_URL}devices/${match.params.id}`}
           title="Preview"
           className={styles.previewWrapper}
           style={{

@@ -180,3 +180,18 @@
   white-space: pre;
   font-family: "Courier New", Courier, monospace;
 }
+
+.qrCode {
+  margin: 1em 0;
+}
+
+.qrCodePreview {
+  display: flex;
+  span {
+    display: block;
+    margin-bottom: 1em;
+  }
+  .meta {
+    margin-left: 1em;
+  }
+}

@@ -5,10 +5,7 @@
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
-    <meta
-      name="description"
-      content="Web site created using create-react-app"
-    />
+    <meta name="description" content="Exhibition preview" />
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
     <!--
       manifest.json provides metadata used when your web app is installed on a
@@ -25,7 +22,6 @@
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
     <title>Exhbition preview</title>
-    <base href="%PUBLIC_URL%/" />
   </head>
   <body class="wfp--theme-dark--autos">
     <noscript>You need to enable JavaScript to run this app.</noscript>
@@ -41,12 +37,4 @@
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
   </body>
-
-  <script>
-    var balenaEnv = {};
-    if (typeof (require !== undefined)) {
-      var electron = require("electron");
-      var balenaEnv = electron.remote.getGlobal("balenaEnv");
-    }
-  </script>
 </html>

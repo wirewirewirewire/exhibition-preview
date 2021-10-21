@@ -34,7 +34,6 @@ const enhancer = composeEnhancers(
   applyMiddleware(sagaMiddleware /*, routerMiddleware(history)*/)
 );
 const storeEntry = createStore(persistedReducer, enhancer);
-axiosInterceptors.setupInterceptors(/*storeEntry*/);
 sagaMiddleware.run(rootSaga);
 
 export const store = storeEntry;

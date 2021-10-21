@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useCallback, useRef } from "react";
 import styles from "./styles.module.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { Button, Loading } from "@wfp/ui";
@@ -16,12 +16,41 @@ import Empty from "components/Empty";
 import { faCrow, faPlay } from "@fortawesome/pro-light-svg-icons";
 import { faExternalLink, faSearch } from "@fortawesome/pro-solid-svg-icons";
 import Partizipation from "components/Partizipation";
+import QRCode from "qrcode.react";
+
+import image from "./Frame 2.svg";
+// eslint-disable-next-line import/no-webpack-loader-syntax
+import imageRaw from "!raw-loader!./Frame 2.svg";
 
 const Details = (props) => {
   const params = useParams();
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(devices.actions.fetchSingle({ postId: params.id }));
+  }, []);
+
+  function downloadBlob(blob, filename) {
+    const objectUrl = URL.createObjectURL(blob);
+
+    const link = document.createElement("a");
+    link.href = objectUrl;
+    link.download = filename;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+
+    setTimeout(() => URL.revokeObjectURL(objectUrl), 5000);
+  }
+
+  const svgRef = useRef();
+
+  const downloadSVG = useCallback(() => {
+    let content = svgRef.current.children[0].innerHTML;
+
+    //content = content.replaceAll("<image[^>]*>", imageRaw);
+    const contentWithSvg = `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" height="128" width="128" viewBox="0 0 29 29">${content}</svg>`;
+    const blob = new Blob([contentWithSvg], { type: "image/svg+xml" });
+    downloadBlob(blob, `qrcode-${params.id}.svg`);
   }, []);
 
   const data = useSelector((state) =>
@@ -75,7 +104,7 @@ const Details = (props) => {
 
       <div className={styles.buttons}>
         {(previewSettings?.previewurl || mediaplayerSettings) && (
-          <NavLink to={`/preview/${params.id}`} target="_blank">
+          <NavLink to={`/p/${params.id}`} target="_blank">
             <Button
               icon={
                 <FontAwesomeIcon
@@ -89,6 +118,7 @@ const Details = (props) => {
             </Button>
           </NavLink>
         )}
+
         <a
           href={`${process.env.REACT_APP_SERVER_BASE_URL}admin/plugins/content-manager/collectionType/application::devices.devices/${params.id}`}
           target="_blank"
@@ -120,6 +150,45 @@ const Details = (props) => {
           </Button>
         </a>
       </div>
+
+      {(previewSettings?.previewurl || mediaplayerSettings) && (
+        <div className={styles.qrCode}>
+          <h4>QR-Code</h4>
+          <div className={styles.qrCodePreview}>
+            <div ref={svgRef}>
+              <QRCode
+                value={`${
+                  process.env.REACT_APP_WEB_BASE_URL
+                    ? process.env.REACT_APP_WEB_BASE_URL
+                    : window.location.href
+                }p/${params.id}`}
+                renderAs={"svg"}
+                //level="M"
+                /*imageSettings={{
+                  src: image,
+                  height: 40,
+                  width: 26,
+                  x: 52,
+                  y: 42,
+                  excavate: true,
+                }}*/
+              />
+            </div>
+            <div className={styles.meta}>
+              <span>
+                {`${
+                  process.env.REACT_APP_WEB_BASE_URL
+                    ? process.env.REACT_APP_WEB_BASE_URL
+                    : window.location.href
+                }p/${params.id}`}
+              </span>
+              <Button kind="secondary" onClick={downloadSVG} small>
+                Download QR-Code
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
       {data.deviceKind && (
         <div>
           {data.deviceKind.map((deviceKind) => (

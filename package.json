@@ -3,13 +3,12 @@
   "version": "1.0.0",
   "description": "electronJS-based balena application",
   "main": "src/index.js",
-  "homepage": "./",
   "scripts": {
     "lint": "eslint .",
     "start": "craco start",
     "build": "CI='' craco build",
     "test": "craco test",
-    "vercel": "vercel --prod"
+    "vercel": "npm run build && vercel --prod"
   },
   "repository": {
     "type": "git",
@@ -44,6 +43,8 @@
     "i18next-browser-languagedetector": "^6.0.1",
     "moment": "^2.29.1",
     "node-sass": "^5.0.0",
+    "qrcode.react": "^1.0.1",
+    "raw-loader": "^4.0.2",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-hook-form": "^6.15.1",

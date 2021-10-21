@@ -30,7 +30,6 @@ const Overview = ({ questions }) => {
   const params = useParams();
   const dispatch = useDispatch();
   useEffect(() => {
-    console.log("reload");
     dispatch(devices.actions.fetch());
   }, []);
 
